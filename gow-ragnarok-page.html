@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>God of War Ragnarök</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 50px;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #4a7c9e, #6fa8d1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+        }
+
+        .back-btn {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 25px;
+            border: 2px solid #4a7c9e;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #4a7c9e;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+        position: relative;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        margin-top: 0;
+        padding-top: 0;
+        }
+
+        .hero video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -2;
+        }
+
+        .hero .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.65);
+        z-index: -1;
+        }
+
+        .hero-content {
+        position: relative;
+        text-align: center;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 40px 20px;
+        }
+
+        .hero-title {
+        font-size: 80px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #fff;
+        text-shadow: 0 4px 24px rgba(0,0,0,0.8);
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-subtitle {
+        font-size: 24px;
+        margin-bottom: 40px;
+        color: #eee; /* use white or very light gray */
+        text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .game-logo {
+            font-size: 90px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            animation: slideDown 1s ease-out;
+            text-shadow: 4px 4px 12px rgba(0, 0, 0, 0.8);
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #a8d0e8;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .release-info {
+            font-size: 18px;
+            color: #ccc;
+            margin-bottom: 40px;
+            animation: fadeIn 2s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            animation: slideUp 1.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .btn {
+            padding: 15px 40px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4a7c9e, #6fa8d1);
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(74, 124, 158, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(74, 124, 158, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+        }
+
+        .btn-secondary:hover {
+            background: #fff;
+            color: #0a0a0a;
+            transform: translateY(-3px);
+        }
+
+        /* Overview Section */
+        .overview {
+            padding: 100px 50px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 48px;
+            margin-bottom: 60px;
+            background: linear-gradient(135deg, #fff, #6fa8d1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .overview-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .overview-text {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #ccc;
+        }
+
+        .overview-text p {
+            margin-bottom: 20px;
+        }
+
+        .overview-image {
+        width: 100%;
+        height: 400px;
+        border-radius: 15px;
+        overflow: hidden;
+        border: 2px solid rgba(74, 124, 158, 0.3);
+        position: relative;
+        }
+
+        .overview-image video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /* Features Grid */
+        .features {
+            padding: 100px 50px;
+            background: linear-gradient(180deg, #0a0a0a 0%, #0f1a20 100%);
+        }
+
+        .features-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .feature-card {
+            background: linear-gradient(145deg, #1a2530, #0f1a20);
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid rgba(74, 124, 158, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(74, 124, 158, 0.5);
+            box-shadow: 0 20px 40px rgba(74, 124, 158, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #6fa8d1;
+        }
+
+        .feature-description {
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        /* Gameplay Section */
+        .gameplay {
+            padding: 100px 50px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gameplay-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .gameplay-card {
+            background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .gameplay-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #6fa8d1;
+        }
+
+        .gameplay-card p {
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        /* Specs Section */
+        .specs {
+            padding: 100px 50px;
+            background: #0f0f0f;
+        }
+
+        .specs-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .spec-box {
+            background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid rgba(74, 124, 158, 0.2);
+        }
+
+        .spec-box h3 {
+            font-size: 28px;
+            margin-bottom: 25px;
+            color: #6fa8d1;
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .spec-label {
+            color: #999;
+        }
+
+        .spec-value {
+            color: #fff;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            background: #050505;
+            padding: 50px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content p {
+            color: #666;
+            margin: 10px 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .game-logo {
+                font-size: 48px;
+            }
+
+            .overview-content,
+            .specs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            nav {
+                padding: 20px;
+            }
+
+            .overview, .features, .gameplay, .specs {
+                padding: 60px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">GOD OF WAR RAGNARÖK</div>
+            <a href="/Users/yoboxo/Desktop/Capstone/god-of-war-website.html" class="back-btn">← Back to Main</a>
+        </div>
+    </nav>
+    <section class="hero" id="home">
+    <video autoplay muted loop playsinline aria-hidden="true">
+        <source src="/Users/yoboxo/Desktop/Capstone/Vids/freya-attacking-kratos.1920x1080.mp4" type="video/mp4">
+    </video>
+    <div class="overlay"></div>
+    <div class="hero-content">
+        <h1 class="game-logo">GOD OF WAR<br>RAGNARÖK</h1>
+        <p class="subtitle">The Epic Conclusion to the Norse Saga</p>
+            <p class="release-info">PS5, PS4 | Released November 9, 2022</p>
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary">Buy Now</a>
+                <a href="#overview" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="overview" class="overview">
+        <h2 class="section-title">Epic Journey Awaits</h2>
+        <div class="overview-content">
+            <div class="overview-text">
+                <p>Kratos and Atreus embark on a mythic journey for answers before Ragnarök arrives. Together, Kratos and Atreus venture deep into the Nine Realms in search of answers as Asgardian forces prepare for war.</p>
+                <p>Along the way they will explore stunning, mythical landscapes, gather allies from across the realms and face fearsome enemies in the form of Norse gods and monsters.</p>
+                <p>As the threat of Ragnarök grows ever closer, Kratos and Atreus find themselves choosing between the safety of their family and the safety of the realms.</p>
+                <p>All the while, Asgardian forces assemble and prepare for the prophesied battle that will end the world.</p>
+            </div>
+            <div class="overview-image">
+                <video autoplay muted loop playsinline>
+                <source src="/Users/yoboxo/Desktop/Capstone/Vids/snowy-peaks-of-god-of-war.3840x2160.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="features-container">
+            <h2 class="section-title">Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚔️</div>
+                    <h3 class="feature-title">Enhanced Combat</h3>
+                    <p class="feature-description">Master new abilities with the Leviathan Axe and Blades of Chaos. Experience fluid, expressive combat refined to perfection.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3 class="feature-title">Nine Realms</h3>
+                    <p class="feature-description">Journey through all Nine Realms of Norse mythology, each with breathtaking landscapes and unique challenges.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3 class="feature-title">Compelling Characters</h3>
+                    <p class="feature-description">Meet a cast of memorable characters from Norse mythology, each with their own story and motivations.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎭</div>
+                    <h3 class="feature-title">Epic Story</h3>
+                    <p class="feature-description">Experience an emotional, unflinching narrative about family, sacrifice, and the weight of choices.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎮</div>
+                    <h3 class="feature-title">Next-Gen Experience</h3>
+                    <p class="feature-description">Stunning 4K visuals, 60 FPS performance, and immersive DualSense features on PS5.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎵</div>
+                    <h3 class="feature-title">Award-Winning Audio</h3>
+                    <p class="feature-description">Immerse yourself in a cinematic soundscape with the epic musical score by Bear McCreary.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="gameplay">
+        <h2 class="section-title">Gameplay Highlights</h2>
+        <div class="gameplay-grid">
+            <div class="gameplay-card">
+                <h3>Brutal Battles</h3>
+                <p>Face off against fierce Norse gods, monsters, and beasts in strategic, visceral combat encounters.</p>
+            </div>
+            <div class="gameplay-card">
+                <h3>Puzzle Solving</h3>
+                <p>Solve environmental puzzles and unlock secrets scattered throughout the Nine Realms.</p>
+            </div>
+            <div class="gameplay-card">
+                <h3>Character Progression</h3>
+                <p>Upgrade weapons, armor, and abilities to customize your playstyle and become unstoppable.</p>
+            </div>
+            <div class="gameplay-card">
+                <h3>Exploration</h3>
+                <p>Discover hidden areas, collectibles, and side quests that expand the rich Norse mythology.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="specs">
+        <div class="specs-container">
+            <h2 class="section-title">Game Information</h2>
+            <div class="specs-grid">
+                <div class="spec-box">
+                    <h3>Technical Specs</h3>
+                    <div class="spec-item">
+                        <span class="spec-label">Platform</span>
+                        <span class="spec-value">PS5, PS4</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Release Date</span>
+                        <span class="spec-value">November 9, 2022</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Genre</span>
+                        <span class="spec-value">Action-Adventure</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Players</span>
+                        <span class="spec-value">Single-player</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Developer</span>
+                        <span class="spec-value">Santa Monica Studio</span>
+                    </div>
+                </div>
+                <div class="spec-box">
+                    <h3>Features</h3>
+                    <div class="spec-item">
+                        <span class="spec-label">4K Support</span>
+                        <span class="spec-value">✓ Yes</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">HDR</span>
+                        <span class="spec-value">✓ Yes</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">60 FPS Mode</span>
+                        <span class="spec-value">✓ Yes (PS5)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">DualSense Features</span>
+                        <span class="spec-value">✓ Yes</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">3D Audio</span>
+                        <span class="spec-value">✓ Yes</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <p>© 2024 God of War Fan Project | Created for SNW Phase 1</p>
+            <p style="margin-top: 10px; font-size: 14px;">This is a student project. All rights to God of War belong to Sony Interactive Entertainment.</p>
+        </div>
+    </footer>
+</body>
+</html>

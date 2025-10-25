@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>God of War: Ghost of Sparta</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 50px;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #c45a3a, #e67a5a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+        }
+
+        .back-btn {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 25px;
+            border: 2px solid #c45a3a;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #c45a3a;
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            height: 100vh;
+            background: linear-gradient(180deg, rgba(10,10,10,0.3) 0%, rgba(10,10,10,0.9) 100%),
+                        linear-gradient(135deg, #c45a3a, #9e4428);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(196, 90, 58, 0.3) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+            max-width: 900px;
+            padding: 0 20px;
+        }
+
+        .game-logo {
+            font-size: 70px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            animation: slideDown 1s ease-out;
+            text-shadow: 4px 4px 12px rgba(0, 0, 0, 0.8);
+            line-height: 1.3;
+        }
+
+        .subtitle {
+            font-size: 26px;
+            margin-bottom: 15px;
+            color: #e8a890;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .release-info {
+            font-size: 18px;
+            color: #ccc;
+            margin-bottom: 40px;
+            animation: fadeIn 2s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            animation: slideUp 1.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .btn {
+            padding: 15px 40px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #c45a3a, #e67a5a);
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(196, 90, 58, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(196, 90, 58, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+        }
+
+        .btn-secondary:hover {
+            background: #fff;
+            color: #0a0a0a;
+            transform: translateY(-3px);
+        }
+
+        .overview {
+            padding: 100px 50px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 48px;
+            margin-bottom: 60px;
+            background: linear-gradient(135deg, #fff, #e67a5a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .overview-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .overview-text {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #ccc;
+        }
+
+        .overview-text p {
+            margin-bottom: 20px;
+        }
+
+        .overview-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #b8523a, #8a3828);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #666;
+            border: 2px solid rgba(196, 90, 58, 0.3);
+        }
+
+        .features {
+            padding: 100px 50px;
+            background: linear-gradient(180deg, #0a0a0a 0%, #1a0808 100%);
+        }
+
+        .features-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .feature-card {
+            background: linear-gradient(145deg, #2a1818, #1a0808);
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid rgba(196, 90, 58, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(196, 90, 58, 0.5);
+            box-shadow: 0 20px 40px rgba(196, 90, 58, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #e67a5a;
+        }
+
+        .feature-description {
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        .story {
+            padding: 100px 50px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .story-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .story-card {
+            background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+            padding: 35px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .story-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #e67a5a;
+        }
+
+        .story-card p {
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        footer {
+            background: #050505;
+            padding: 50px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content p {
+            color: #666;
+            margin: 10px 0;
+        }
+
+        @media (max-width: 768px) {
+            .game-logo {
+                font-size: 40px;
+            }
+
+            .overview-content {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            nav {
+                padding: 20px;
+            }
+
+            .overview, .features, .story {
+                padding: 60px 20px;
+            }
+        }
+        /* Specs Section */
+        .specs {
+            padding: 100px 50px;
+            background: #0f0f0f;
+        }
+
+        .specs-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .spec-box {
+            background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid rgba(74, 124, 158, 0.2);
+        }
+
+        .spec-box h3 {
+            font-size: 28px;
+            margin-bottom: 25px;
+            color: #6fa8d1;
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .spec-label {
+            color: #999;
+        }
+
+        .spec-value {
+            color: #fff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">GOD OF WAR: GHOST OF SPARTA</div>
+            <a href="/Users/yoboxo/Desktop/Capstone/god-of-war-website.html" class="back-btn">← Back to Main</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="game-logo">GOD OF WAR<br>GHOST OF SPARTA</h1>
+            <p class="subtitle">Uncover the Mystery of Your Past</p>
+            <p class="release-info">PSP | Released November 2, 2010</p>
+            <div class="cta-buttons">
+                <a href="#overview" class="btn btn-primary">Discover More</a>
+                <a href="#" class="btn btn-secondary">View Gallery</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="overview" class="overview">
+        <h2 class="section-title">A Personal Journey</h2>
+        <div class="overview-content">
+            <div class="overview-text">
+                <p>Set between the events of God of War and God of War II, Ghost of Sparta explores Kratos' quest to discover the truth about his mysterious past and his family.</p>
+                <p>Haunted by visions of his mortal past, Kratos embarks on a journey to the lost city of Atlantis and the volcanic domain of Thera to uncover the origins of his nightmares.</p>
+                <p>This PSP exclusive delivers a console-quality experience in the palm of your hands, with stunning graphics and the series' signature brutal combat.</p>
+                <p>Discover the secrets that shaped Kratos into the Ghost of Sparta and witness the events that drove him deeper into darkness.</p>
+            </div>
+            <div class="overview-image">
+                <span>The Ghost Rises</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="features-container">
+            <h2 class="section-title">Portable Power</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎮</div>
+                    <h3 class="feature-title">Console Experience</h3>
+                    <p class="feature-description">Full God of War experience on PSP with stunning graphics that rival home console quality.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚔️</div>
+                    <h3 class="feature-title">Brutal Combat</h3>
+                    <p class="feature-description">Unleash devastating combos with the Blades of Athena and new weapons like the Arms of Sparta.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌋</div>
+                    <h3 class="feature-title">Epic Locations</h3>
+                    <p class="feature-description">Journey through Atlantis, the volcanic realm of Thera, and the mysterious Domain of Death.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👹</div>
+                    <h3 class="feature-title">Legendary Bosses</h3>
+                    <p class="feature-description">Battle massive creatures and gods including Thanatos, the God of Death himself.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📖</div>
+                    <h3 class="feature-title">Deep Story</h3>
+                    <p class="feature-description">Uncover the truth about Kratos' brother Deimos and the prophecy that haunts him.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">New Powers</h3>
+                    <p class="feature-description">Wield the Thera's Bane, a powerful fire-based magic that incinerates enemies.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="story">
+        <h2 class="section-title">Story Highlights</h2>
+        <div class="story-grid">
+            <div class="story-card">
+                <h3>Family Secrets</h3>
+                <p>Discover the truth about Kratos' brother Deimos, who was taken by the gods as a child.</p>
+            </div>
+            <div class="story-card">
+                <h3>The Marked Warrior</h3>
+                <p>Learn about the prophecy that led the gods to fear and hunt the marked Spartan warrior.</p>
+            </div>
+            <div class="story-card">
+                <h3>Lost City of Atlantis</h3>
+                <p>Explore the mythical underwater city in search of answers about your past.</p>
+            </div>
+            <div class="story-card">
+                <h3>Thanatos' Domain</h3>
+                <p>Enter the realm of Death itself to rescue your brother from eternal torment.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="specs">
+        <div class="specs-container">
+            <h2 class="section-title">Game Information</h2>
+            <div class="specs-grid">
+                <div class="spec-box">
+                    <h3>Technical Specs</h3>
+                    <div class="spec-item">
+                        <span class="spec-label">Platform</span>
+                        <span class="spec-value">PS5, PS4</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Release Date</span>
+                        <span class="spec-value">November 9, 2022</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Genre</span>
+                        <span class="spec-value">Action-Adventure</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Players</span>
+                        <span class="spec-value">Single-player</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Developer</span>
+                        <span class="spec-value">Santa Monica Studio</span>
+                    </div>
+                </div>
+                <div class="spec-box">
+                    <h3>Features</h3>
+                    <div class="spec-item">
+                        <span class="spec-label">4K Support</span>
+                        <span class="spec-value">✓ Yes</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">HDR</span>
+                        <span class="spec-value">✓ Yes</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">60 FPS Mode</span>
+                        <span class="spec-value">✓ Yes (PS5)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">DualSense Features</span>
+                        <span class="spec-value">✓ Yes</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">3D Audio</span>
+                        <span class="spec-value">✓ Yes</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="specs">
+        <div class="specs-container">
+            <h2 class="section-title">Game Information</h2>
+            <div class="specs-grid">
+                <div class="spec-box">
+                    <h3>Technical Specs</h3>
+                    <div class="spec-item">
+                        <span class="spec-label">Platform</span>
+                        <span class="spec-value">PS5, PS4</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Release Date</span>
+                        <span class="spec-value">November 9, 2022</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Genre</span>
+                        <span class="spec-value">Action-Adventure</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Players</span>
+                        <span class="spec-value">Single-player</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Developer</span>
+                        <span class="spec-value">Santa Monica Studio</span>
+                    </div>
+                </div>
+                <div class="spec-box">
+                    <h3>Features</h3>
+                    <div class="spec-item">
+                        <span class="spec-label">4K Support</span>
+                        <span class="spec-value">✓ Yes</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">HDR</span>
+                        <span class="spec-value">✓ Yes</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">60 FPS Mode</span>
+                        <span class="spec-value">✓ Yes (PS5)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">DualSense Features</span>
+                        <span class="spec-value">✓ Yes</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">3D Audio</span>
+                        <span class="spec-value">✓ Yes</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <p>© 2024 God of War Fan Project | Created for SNW Phase 1</p>
+            <p style="margin-top: 10px; font-size: 14px;">This is a student project. All rights to God of War belong to Sony Interactive Entertainment.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>God of War (2005)</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0a0a0a; color: #fff; overflow-x: hidden; }
+        nav { position: fixed; top: 0; width: 100%; background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(10px); padding: 20px 50px; z-index: 1000; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: 0 auto; }
+        .logo { font-size: 24px; font-weight: bold; background: linear-gradient(135deg, #6a8aa8, #8ab0d0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 2px; }
+        .back-btn { color: #fff; text-decoration: none; padding: 10px 25px; border: 2px solid #6a8aa8; border-radius: 5px; transition: all 0.3s ease; }
+        .back-btn:hover { background: #6a8aa8; transform: translateY(-2px); }
+        .hero { height: 100vh; background: linear-gradient(180deg, rgba(10,10,10,0.3) 0%, rgba(10,10,10,0.9) 100%), linear-gradient(135deg, #6a8aa8, #4d6b82); display: flex; align-items: center; justify-content: center; position: relative; }
+        .hero::before { content: ''; position: absolute; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, rgba(106, 138, 168, 0.3) 0%, transparent 70%); animation: pulse 4s ease-in-out infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+        .hero-content { text-align: center; z-index: 1; max-width: 900px; padding: 0 20px; }
+        .game-logo { font-size: 100px; font-weight: bold; margin-bottom: 20px; animation: slideDown 1s ease-out; text-shadow: 4px 4px 12px rgba(0, 0, 0, 0.8); }
+        .subtitle { font-size: 28px; margin-bottom: 15px; color: #b0d0e8; animation: fadeIn 1.5s ease-out; }
+        .release-info { font-size: 18px; color: #ccc; margin-bottom: 40px; animation: fadeIn 2s ease-out; }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-50px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .cta-buttons { display: flex; gap: 20px; justify-content: center; animation: slideUp 1.5s ease-out; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+        .btn { padding: 15px 40px; font-size: 18px; border: none; border-radius: 5px; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: inline-block; }
+        .btn-primary { background: linear-gradient(135deg, #6a8aa8, #8ab0d0); color: #fff; box-shadow: 0 10px 30px rgba(106, 138, 168, 0.3); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(106, 138, 168, 0.5); }
+        .btn-secondary { background: transparent; color: #fff; border: 2px solid #fff; }
+        .btn-secondary:hover { background: #fff; color: #0a0a0a; transform: translateY(-3px); }
+        .overview { padding: 100px 50px; max-width: 1400px; margin: 0 auto; }
+        .section-title { text-align: center; font-size: 48px; margin-bottom: 60px; background: linear-gradient(135deg, #fff, #8ab0d0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .overview-content { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .overview-text { font-size: 18px; line-height: 1.8; color: #ccc; }
+        .overview-text p { margin-bottom: 20px; }
+        .overview-image { width: 100%; height: 400px; background: linear-gradient(135deg, #7a9ab8, #5a7a98); border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: #666; border: 2px solid rgba(106, 138, 168, 0.3); }
+        .features { padding: 100px 50px; background: linear-gradient(180deg, #0a0a0a 0%, #0a1218 100%); }
+        .features-container { max-width: 1400px; margin: 0 auto; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 60px; }
+        .feature-card { background: linear-gradient(145deg, #1a2228, #0a1218); padding: 40px; border-radius: 15px; border: 1px solid rgba(106, 138, 168, 0.2); transition: all 0.3s ease; }
+        .feature-card:hover { transform: translateY(-10px); border-color: rgba(106, 138, 168, 0.5); box-shadow: 0 20px 40px rgba(106, 138, 168, 0.2); }
+        .feature-icon { font-size: 48px; margin-bottom: 20px; }
+        .feature-title { font-size: 24px; margin-bottom: 15px; color: #8ab0d0; }
+        .feature-description { color: #ccc; line-height: 1.6; }
+        .legacy { padding: 100px 50px; max-width: 1400px; margin: 0 auto; }
+        .legacy-content { text-align: center; max-width: 900px; margin: 0 auto 60px; }
+        .legacy-content p { font-size: 18px; line-height: 1.8; color: #ccc; margin-bottom: 20px; }
+        .awards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; }
+        .award-card { background: linear-gradient(145deg, #1a1a1a, #0f0f0f); padding: 30px; border-radius: 15px; border: 1px solid rgba(106, 138, 168, 0.2); text-align: center; }
+        .award-icon { font-size: 48px; margin-bottom: 15px; }
+        .award-title { font-size: 18px; color: #8ab0d0; margin-bottom: 10px; }
+        .award-desc { font-size: 14px; color: #999; }
+        footer { background: #050505; padding: 50px; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+        .footer-content p { color: #666; margin: 10px 0; }
+        .specs {
+            padding: 100px 50px;
+            background: #0f0f0f;
+        }
+
+        .specs-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .spec-box {
+            background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid rgba(74, 124, 158, 0.2);
+        }
+
+        .spec-box h3 {
+            font-size: 28px;
+            margin-bottom: 25px;
+            color: #6fa8d1;
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .spec-label {
+            color: #999;
+        }
+
+        .spec-value {
+            color: #fff;
+            font-weight: bold;
+        }
+        @media (max-width: 768px) { .game-logo { font-size: 54px; } .overview-content { grid-template-columns: 1fr; } .cta-buttons { flex-direction: column; } nav { padding: 20px; } .overview, .features, .legacy { padding: 60px 20px; } }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">GOD OF WAR (2005)</div>
+            <a href="/Users/yoboxo/Desktop/Capstone/god-of-war-website.html" class="back-btn">← Back to Main</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="game-logo">GOD OF WAR</h1>
+            <p class="subtitle">Where It All Began</p>
+            <p class="release-info">PS2 | Released March 22, 2005</p>
+            <div class="cta-buttons">
+                <a href="#overview" class="btn btn-primary">Discover the Legend</a>
+                <a href="#" class="btn btn-secondary">Watch Trailer</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="overview" class="overview">
+        <h2 class="section-title">The Legend Begins</h2>
+        <div class="overview-content">
+            <div class="overview-text">
+                <p>In 2005, Santa Monica Studio introduced the world to Kratos, the Ghost of Sparta, in a game that would revolutionize action-adventure gaming and spawn one of PlayStation's most iconic franchises.</p>
+                <p>Haunted by the murder of his family and cursed by the gods, Kratos serves Olympus for ten years. When Athena offers to remove the nightmares that torment him in exchange for one final task, Kratos must kill Ares, the God of War himself.</p>
+                <p>This groundbreaking PS2 title combined brutal combat, epic boss battles, intricate puzzles, and Greek mythology into an unforgettable experience that set new standards for the genre.</p>
+                <p>The original God of War is where Kratos' legendary journey of vengeance began - a tale of rage, redemption, and the price of defying the gods.</p>
+            </div>
+            <div class="overview-image">
+                <span>Birth of a Legend</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="features-container">
+            <h2 class="section-title">Revolutionary Gameplay</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔗</div>
+                    <h3 class="feature-title">Blades of Chaos</h3>
+                    <p class="feature-description">Wield the iconic chained blades in fluid, brutal combat that defined the series' signature style.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏛️</div>
+                    <h3 class="feature-title">Greek Mythology</h3>
+                    <p class="feature-description">Experience authentic Greek mythology with encounters against Medusa, Minotaurs, Cyclops, and more.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚔️</div>
+                    <h3 class="feature-title">Epic Boss Battles</h3>
+                    <p class="feature-description">Face massive enemies including the Hydra, Ares, and other legendary creatures in cinematic encounters.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧩</div>
+                    <h3 class="feature-title">Challenging Puzzles</h3>
+                    <p class="feature-description">Solve intricate environmental puzzles that blend seamlessly with exploration and combat.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Godly Powers</h3>
+                    <p class="feature-description">Unlock devastating magic abilities including Zeus' Fury, Poseidon's Rage, and Army of Hades.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎬</div>
+                    <h3 class="feature-title">Cinematic Experience</h3>
+                    <p class="feature-description">Stunning presentation with seamless transitions between gameplay and cutscenes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="legacy">
+        <h2 class="section-title">A Gaming Legend</h2>
+        <div class="legacy-content">
+            <p>God of War (2005) wasn't just a game - it was a phenomenon that defined a generation of action gaming. Its influence can still be felt in countless games today.</p>
+            <p>The original game received universal acclaim for its innovative combat system, epic scale, and emotional storytelling, establishing Kratos as one of gaming's most iconic characters.</p>
+        </div>
+        <div class="awards-grid">
+            <div class="award-card">
+                <div class="award-icon">🏆</div>
+                <h3 class="award-title">Game of the Year</h3>
+                <p class="award-desc">Multiple GOTY Awards</p>
+            </div>
+            <div class="award-card">
+                <div class="award-icon">⭐</div>
+                <h3 class="award-title">Critical Acclaim</h3>
+                <p class="award-desc">94 Metacritic Score</p>
+            </div>
+            <div class="award-card">
+                <div class="award-icon">🎮</div>
+                <h3 class="award-title">Best Action Game</h3>
+                <p class="award-desc">Industry Recognition</p>
+            </div>
+            <div class="award-card">
+                <div class="award-icon">🎨</div>
+                <h3 class="award-title">Best Graphics</h3>
+                <p class="award-desc">Visual Excellence</p>
+            </div>
+            <div class="award-card">
+                <div class="award-icon">📖</div>
+                <h3 class="award-title">Best Story</h3>
+                <p class="award-desc">Compelling Narrative</p>
+            </div>
+            <div class="award-card">
+                <div class="award-icon">🌟</div>
+                <h3 class="award-title">Franchise Born</h3>
+                <p class="award-desc">20+ Year Legacy</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="specs">
+        <div class="specs-container">
+            <h2 class="section-title">Game Information</h2>
+            <div class="specs-grid">
+                <div class="spec-box">
+                    <h3>Technical Specs</h3>
+                    <div class="spec-item">
+                        <span class="spec-label">Platform</span>
+                        <span class="spec-value">PS5, PS4</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Release Date</span>
+                        <span class="spec-value">November 9, 2022</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Genre</span>
+                        <span class="spec-value">Action-Adventure</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Players</span>
+                        <span class="spec-value">Single-player</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Developer</span>
+                        <span class="spec-value">Santa Monica Studio</span>
+                    </div>
+                </div>
+                <div class="spec-box">
+                    <h3>Features</h3>
+                    <div class="spec-item">
+                        <span class="spec-label">4K Support</span>
+                        <span class="spec-value">✓ Yes</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">HDR</span>
+                        <span class="spec-value">✓ Yes</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">60 FPS Mode</span>
+                        <span class="spec-value">✓ Yes (PS5)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">DualSense Features</span>
+                        <span class="spec-value">✓ Yes</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">3D Audio</span>
+                        <span class="spec-value">✓ Yes</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <p>© 2024 God of War Fan Project | Created for SNW Phase 1</p>
+            <p style="margin-top: 10px; font-size: 14px;">This is a student project. All rights to God of War belong to Sony Interactive Entertainment.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>God of War III</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 50px;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #8a3a3a, #c05a5a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+        }
+
+        .back-btn {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 25px;
+            border: 2px solid #8a3a3a;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #8a3a3a;
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            height: 100vh;
+            background: linear-gradient(180deg, rgba(10,10,10,0.3) 0%, rgba(10,10,10,0.9) 100%),
+                        linear-gradient(135deg, #8a3a3a, #6e2828);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(138, 58, 58, 0.4) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+            max-width: 900px;
+            padding: 0 20px;
+        }
+
+        .game-logo {
+            font-size: 90px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            animation: slideDown 1s ease-out;
+            text-shadow: 4px 4px 12px rgba(0, 0, 0, 0.8);
+        }
+
+        .subtitle {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #e8a0a0;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .release-info {
+            font-size: 18px;
+            color: #ccc;
+            margin-bottom: 40px;
+            animation: fadeIn 2s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            animation: slideUp 1.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .btn {
+            padding: 15px 40px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #8a3a3a, #c05a5a);
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(138, 58, 58, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(138, 58, 58, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+        }
+
+        .btn-secondary:hover {
+            background: #fff;
+            color: #0a0a0a;
+            transform: translateY(-3px);
+        }
+
+        .overview {
+            padding: 100px 50px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 48px;
+            margin-bottom: 60px;
+            background: linear-gradient(135deg, #fff, #c05a5a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .overview-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .overview-text {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #ccc;
+        }
+
+        .overview-text p {
+            margin-bottom: 20px;
+        }
+
+        .overview-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #a04040, #702828);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #666;
+            border: 2px solid rgba(138, 58, 58, 0.3);
+        }
+
+        .features {
+            padding: 100px 50px;
+            background: linear-gradient(180deg, #0a0a0a 0%, #180808 100%);
+        }
+
+        .features-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .feature-card {
+            background: linear-gradient(145deg, #281818, #180808);
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid rgba(138, 58, 58, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(138, 58, 58, 0.5);
+            box-shadow: 0 20px 40px rgba(138, 58, 58, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #c05a5a;
+        }
+
+        .feature-description {
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        .gods-section {
+            padding: 100px 50px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .god-card {
+            background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .god-icon {
+            font-size: 56px;
+            margin-bottom: 15px;
+        }
+
+        .god-name {
+            font-size: 22px;
+            color: #c05a5a;
+            margin-bottom: 10px;
+        }
+
+        .god-desc {
+            color: #ccc;
+            font-size: 14px;
+        }
+
+        footer {
+            background: #050505;
+            padding: 50px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content p {
+            color: #666;
+            margin: 10px 0;
+        }
+
+        @media (max-width: 768px) {
+            .game-logo { font-size: 52px; }
+            .overview-content { grid-template-columns: 1fr; }
+            .cta-buttons { flex-direction: column; }
+            nav { padding: 20px; }
+            .overview, .features, .gods-section { padding: 60px 20px; }
+        }
+        /* Specs Section */
+        .specs {
+            padding: 100px 50px;
+            background: #0f0f0f;
+        }
+
+        .specs-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .spec-box {
+            background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid rgba(74, 124, 158, 0.2);
+        }
+
+        .spec-box h3 {
+            font-size: 28px;
+            margin-bottom: 25px;
+            color: #6fa8d1;
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .spec-label {
+            color: #999;
+        }
+
+        .spec-value {
+            color: #fff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">GOD OF WAR III</div>
+            <a href="/Users/yoboxo/Desktop/Capstone/god-of-war-website.html" class="back-btn">← Back to Main</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="game-logo">GOD OF WAR III</h1>
+            <p class="subtitle">The Epic Conclusion</p>
+            <p class="release-info">PS3 | Released March 16, 2010</p>
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary">Buy Now</a>
+                <a href="#overview" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="overview" class="overview">
+        <h2 class="section-title">Vengeance Complete</h2>
+        <div class="overview-content">
+            <div class="overview-text">
+                <p>God of War III brings the epic Greek saga to its dramatic conclusion. Kratos, aided by the Titans, storms Mount Olympus to exact his revenge on the gods who betrayed him.</p>
+                <p>Armed with the Blades of Exile and an arsenal of devastating weapons, Kratos battles through the heights of Olympus and the depths of Hades to confront Zeus and end the reign of the Olympian Gods.</p>
+                <p>Experience the most brutal and epic battles in the series, featuring larger-than-life boss fights against Zeus, Poseidon, Hades, and more Olympian deities.</p>
+                <p>This is Kratos' final journey of vengeance - a path that will shake the very foundations of the world.</p>
+            </div>
+            <div class="overview-image">
+                <span>Olympus Falls</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="features-container">
+            <h2 class="section-title">Epic Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚔️</div>
+                    <h3 class="feature-title">Brutal Combat</h3>
+                    <p class="feature-description">Unleash devastating attacks with new weapons including the Claws of Hades, Nemesis Whip, and Blade of Olympus.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏛️</div>
+                    <h3 class="feature-title">Mount Olympus</h3>
+                    <p class="feature-description">Scale the heights of Mount Olympus in a journey that spans multiple realms and epic locations.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👑</div>
+                    <h3 class="feature-title">God Slayer</h3>
+                    <p class="feature-description">Face and defeat the mighty Olympian gods in spectacular boss battles that push the PS3 to its limits.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎮</div>
+                    <h3 class="feature-title">Enhanced Graphics</h3>
+                    <p class="feature-description">Stunning visuals with improved lighting, textures, and cinematic presentation at unprecedented scale.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔥</div>
+                    <h3 class="feature-title">New Abilities</h3>
+                    <p class="feature-description">Harness new powers including the ability to instantly travel between realms and manipulate time.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💀</div>
+                    <h3 class="feature-title">Epic Scale</h3>
+                    <p class="feature-description">Battle enemies and bosses of unprecedented size, from titans to gods themselves.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="gods-section">
+        <h2 class="section-title">Gods to Defeat</h2>
+        <div class="gods-grid">
+            <div class="god-card">
+                <div class="god-icon">⚡</div>
+                <h3 class="god-name">Zeus</h3>
+                <p class="god-desc">King of the Gods and final adversary</p>
+            </div>
+            <div class="god-card">
+                <div class="god-icon">🔱</div>
+                <h3 class="god-name">Poseidon</h3>
+                <p class="god-desc">God of the Seas</p>
+            </div>
+            <div class="god-card">
+                <div class="god-icon">💀</div>
+                <h3 class="god-name">Hades</h3>
+                <p class="god-desc">God of the Underworld</p>
+            </div>
+            <div class="god-card">
+                <div class="god-icon">☀️</div>
+                <h3 class="god-name">Helios</h3>
+                <p class="god-desc">God of the Sun</p>
+            </div>
+            <div class="god-card">
+                <div class="god-icon">⚒️</div>
+                <h3 class="god-name">Hephaestus</h3>
+                <p class="god-desc">God of the Forge</p>
+            </div>
+            <div class="god-card">
+                <div class="god-icon">💚</div>
+                <h3 class="god-name">Aphrodite</h3>
+                <p class="god-desc">Goddess of Love</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="specs">
+        <div class="specs-container">
+            <h2 class="section-title">Game Information</h2>
+            <div class="specs-grid">
+                <div class="spec-box">
+                    <h3>Technical Specs</h3>
+                    <div class="spec-item">
+                        <span class="spec-label">Platform</span>
+                        <span class="spec-value">PS5, PS4</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Release Date</span>
+                        <span class="spec-value">November 9, 2022</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Genre</span>
+                        <span class="spec-value">Action-Adventure</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Players</span>
+                        <span class="spec-value">Single-player</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Developer</span>
+                        <span class="spec-value">Santa Monica Studio</span>
+                    </div>
+                </div>
+                <div class="spec-box">
+                    <h3>Features</h3>
+                    <div class="spec-item">
+                        <span class="spec-label">4K Support</span>
+                        <span class="spec-value">✓ Yes</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">HDR</span>
+                        <span class="spec-value">✓ Yes</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">60 FPS Mode</span>
+                        <span class="spec-value">✓ Yes (PS5)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">DualSense Features</span>
+                        <span class="spec-value">✓ Yes</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">3D Audio</span>
+                        <span class="spec-value">✓ Yes</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <p>© 2024 God of War Fan Project | Created for SNW Phase 1</p>
+            <p style="margin-top: 10px; font-size: 14px;">This is a student project. All rights to God of War belong to Sony Interactive Entertainment.</p>
+        </div>
+    </footer>
+</body>
+</html>

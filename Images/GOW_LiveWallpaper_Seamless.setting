@@ -1,0 +1,78 @@
+Composition {
+   CurrentTime = 0,
+   RenderRange = { 0, 600 },
+   GlobalStart = 0,
+   GlobalEnd = 600,
+   OutputFormat = { Width = 3840, Height = 2160, Depth = 3, AspectX = 1, AspectY = 1 },
+   Tools = {
+      Loader1 = Loader {
+         CtrlWZoom = false,
+         Inputs = {
+            ["Clip"] = Input { Value = "gow2018lp.png", },
+         },
+         ViewInfo = OperatorInfo { Pos = { 0, 0 } },
+      },
+      DepthMask1 = BrightnessContrast {
+         Inputs = {
+            Gain = Input { Value = 1.2, },
+            Brightness = Input { Value = 0.1, },
+         },
+         ViewInfo = OperatorInfo { Pos = { 1, 0 } },
+      },
+      Camera3D1 = Camera3D {
+         CtrlWZoom = false,
+         Inputs = {
+            ["FLength"] = Input { Value = 35, },
+            ["ApertureW"] = Input { Value = 0.831, },
+            ["ApertureH"] = Input { Value = 0.467, },
+            ["PlaneOfFocus"] = Input { Value = 1.5, },
+         },
+         ViewInfo = OperatorInfo { Pos = { 2, 0 } },
+      },
+      Renderer3D1 = Renderer3D {
+         Inputs = {
+            ["GlobalOut"] = Input { Value = 600, },
+            ["Width"] = Input { Value = 3840, },
+            ["Height"] = Input { Value = 2160, },
+         },
+         ViewInfo = OperatorInfo { Pos = { 3, 0 } },
+      },
+      FastNoise1 = FastNoise {
+         Inputs = {
+            XScale = Input { Value = 4.5, },
+            YScale = Input { Value = 2.0, },
+            SeetheRate = Input { Value = 0.05, },
+         },
+         ViewInfo = OperatorInfo { Pos = { 1, -1 } },
+      },
+      MergeFog = Merge {
+         Inputs = {
+            Background = Input { SourceOp = "Renderer3D1", Source = "Output" },
+            Foreground = Input { SourceOp = "FastNoise1", Source = "Output" },
+            Gain = Input { Value = 0.25, },
+         },
+         ViewInfo = OperatorInfo { Pos = { 4, 0 } },
+      },
+      Glow1 = Glow {
+         Inputs = {
+            Gain = Input { Value = 0.8, },
+            Softness = Input { Value = 2.0, },
+         },
+         ViewInfo = OperatorInfo { Pos = { 5, 0 } },
+      },
+      Displace1 = Displace {
+         Inputs = {
+            RefractionStrength = Input { Value = 0.02, },
+         },
+         ViewInfo = OperatorInfo { Pos = { 6, 0 } },
+      },
+      Saver1 = Saver {
+         CtrlWZoom = false,
+         Inputs = {
+            ["Clip"] = Input { Value = "GOW_LiveWallpaper_4K.mp4", },
+            ["GlobalOut"] = Input { Value = 600, },
+         },
+         ViewInfo = OperatorInfo { Pos = { 7, 0 } },
+      },
+   },
+}
