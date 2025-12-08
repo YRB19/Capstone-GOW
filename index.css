@@ -344,6 +344,8 @@
             transition: all 0.3s ease;
         }
 
+        
+
         .feature-card:hover .feature-icon,
         .feature-card:hover .feature-title,
         .feature-card:hover .feature-description {
@@ -490,6 +492,22 @@
         }
 
         /* Game Series Section */
+        .favorite-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: transparent;
+            border: none;
+            font-size: 24px;
+            color: #fff;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .favorite-btn:hover {
+            transform: scale(1.2);
+        }
+        
         .game-series {
             padding: 100px 50px;
             background: #0f0f0f;

@@ -39,24 +39,3 @@ gameCards.forEach(card => {
         }
     });
 });
-
-// Add favorite button styles
-const favStyle = document.createElement('style');
-favStyle.textContent = `
-    .favorite-btn {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        background: transparent;
-        border: none;
-        font-size: 24px;
-        color: #fff;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-    
-    .favorite-btn:hover {
-        transform: scale(1.2);
-    }
-`;
-document.head.appendChild(favStyle);
