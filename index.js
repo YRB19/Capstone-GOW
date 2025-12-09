@@ -3,7 +3,7 @@ const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLe
 
 document.addEventListener('keydown', (e) => {
     konamiCode.push(e.key);
-    konamiCode = konamiCode.slice(-10);
+    konamiCode = konamiCode.slice(-8);
     
     if (konamiCode.join(',') === konamiSequence.join(',')) {
         document.body.style.filter = 'hue-rotate(180deg)';
